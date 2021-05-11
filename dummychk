@@ -1,0 +1,19 @@
+#!/bin/bash
+TMP_FILE=/tmp/dummy
+if [ "$(/bin/cat $TMP_FILE 2> /dev/null)" != "" ]
+then
+        # mysql is fine, return http 200
+        /bin/echo -e "HTTP/1.1 200 OK\r\n"
+        /bin/echo -e "Content-Type: Content-Type: text/plain\r\n"
+        /bin/echo -e "\r\n"
+        /bin/echo -e "MySQL is running.\r\n"
+        /bin/echo -e "\r\n"
+else
+        # mysql is fine, return http 503
+        /bin/echo -e "HTTP/1.1 503 Service Unavailable\r\n"
+        /bin/echo -e "Content-Type: Content-Type: text/plain\r\n"
+        /bin/echo -e "\r\n"
+        /bin/echo -e "MySQL is *down*.\r\n"
+        /bin/echo -e "\r\n"
+fi
+
